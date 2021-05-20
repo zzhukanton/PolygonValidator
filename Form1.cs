@@ -61,10 +61,10 @@ namespace PolygonValidator
 			for (int i = 0; i < this.polygonPoints.Length - 4; i++)
 			{
 				Point? intersection = CheckForIntersection(
-					this.polygonPoints[i],
-					this.polygonPoints[i + 1],
-					this.polygonPoints[i + 2],
-					this.polygonPoints[i + 3]);
+					(PointF)this.polygonPoints[i],
+					(PointF)this.polygonPoints[i + 1],
+					(PointF)this.polygonPoints[i + 2],
+					(PointF)this.polygonPoints[i + 3]);
 
 				if (intersection != null)
 				{
@@ -92,19 +92,19 @@ namespace PolygonValidator
 			playground.Refresh();
 		}
 
-		private Point? CheckForIntersection(Point p1, Point p2, Point p3, Point p4)
+		private Point? CheckForIntersection(PointF p1, PointF p2, PointF p3, PointF p4)
 		{
 			// сортируем точки
 			if (p2.X < p1.X)
 			{
-				Point tmp = p1;
+				PointF tmp = p1;
 				p1 = p2;
 				p2 = tmp;
 			}
 
 			if (p4.X < p3.X)
 			{
-				Point tmp = p3;
+				PointF tmp = p3;
 				p3 = p4;
 				p4 = tmp;
 			}
@@ -164,7 +164,7 @@ namespace PolygonValidator
 			double tg1 = (p1.Y - p2.Y) / (p1.X - p2.X);
 			double tg2 = (p3.Y - p4.Y) / (p3.X - p4.X);
 			double shift1 = p1.Y - tg1 * p1.X;
-			double shift2 = p3.Y - tg2 * p4.X;
+			double shift2 = p3.Y - tg2 * p3.X;
 
 			if (tg1 == tg2)
 			{
