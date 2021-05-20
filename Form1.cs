@@ -61,16 +61,10 @@ namespace PolygonValidator
 			for (int i = 0; i < this.polygonPoints.Length - 4; i++)
 			{
 				Point? intersection = CheckForIntersection(
-					new Line
-					{
-						Start = this.polygonPoints[i],
-						End = this.polygonPoints[i + 1]
-					},
-					new Line
-					{
-						Start = this.polygonPoints[i + 2],
-						End = this.polygonPoints[i + 3]
-					});
+					this.polygonPoints[i],
+					this.polygonPoints[i + 1],
+					this.polygonPoints[i + 2],
+					this.polygonPoints[i + 3]);
 
 				if (intersection != null)
 				{
@@ -92,18 +86,28 @@ namespace PolygonValidator
 
 				intersections.ForEach(point =>
 				{
-					g.DrawEllipse(redPen, point.X, point.Y, 1, 1);
+					g.DrawEllipse(redPen, point.X, point.Y, 2, 2);
 				});
 			}
+			playground.Refresh();
 		}
 
-		private Point? CheckForIntersection(Line first, Line third)
+		private Point? CheckForIntersection(Point p1, Point p2, Point p3, Point p4)
 		{
 			// сортируем точки
-			Point p1 = new Point { X = first.Start.X, Y = first.Start.Y };
-			Point p2 = new Point { X = first.End.X, Y = first.End.Y };
-			Point p3 = new Point { X = third.Start.X, Y = third.Start.Y };
-			Point p4 = new Point { X = third.End.X, Y = third.End.Y };
+			if (p2.X < p1.X)
+			{
+				Point tmp = p1;
+				p1 = p2;
+				p2 = tmp;
+			}
+
+			if (p4.X < p3.X)
+			{
+				Point tmp = p3;
+				p3 = p4;
+				p4 = tmp;
+			}
 
 			//проверим существование потенциального интервала для точки пересечения отрезков
 			if (p2.X < p1.X)
@@ -171,7 +175,7 @@ namespace PolygonValidator
 			//Xa - абсцисса точки пересечения двух прямых
 			double resultX = (shift2 - shift1) / (tg1 - tg2);
 
-			if ((resultX < Math.Max(p1.X, third.Start.X)) || (resultX > Math.Min(first.End.X, third.End.X)))
+			if ((resultX < Math.Max(p1.X, p3.X)) || (resultX > Math.Min(p2.X, p4.X)))
 			{
 				//точка Xa находится вне пересечения проекций отрезков на ось X
 				return null;
