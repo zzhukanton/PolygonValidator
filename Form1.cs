@@ -193,6 +193,12 @@ namespace PolygonValidator
 			gmap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
 			GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
 			gmap.Position = new GMap.NET.PointLatLng(48.8589507, 2.2775175);
+
+			// load somewhere at default location
+			// once file is opened, draw polygon if data is valid
+			// find intersections by clicking the button
+			// delete intersections by clicking the button
+			// add color selector
 		}
 	}
 }
