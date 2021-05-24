@@ -186,5 +186,13 @@ namespace PolygonValidator
 				return new Point { X = (int)Math.Round(resultX), Y = (int)Math.Round(resultY) };
 			}
 		}
+
+		private void gmap_Load(object sender, EventArgs e)
+		{
+			gmap.ShowCenter = false;
+			gmap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
+			GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+			gmap.Position = new GMap.NET.PointLatLng(48.8589507, 2.2775175);
+		}
 	}
 }

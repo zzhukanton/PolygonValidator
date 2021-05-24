@@ -33,7 +33,7 @@ namespace PolygonValidator
 			this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
+			this.gmap = new GMap.NET.WindowsForms.GMapControl();
 			this.openFile = new System.Windows.Forms.OpenFileDialog();
 			this.playground = new System.Windows.Forms.PictureBox();
 			this.findButton = new System.Windows.Forms.Button();
@@ -74,31 +74,32 @@ namespace PolygonValidator
 			this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
 			this.сохранитьToolStripMenuItem.Text = "Сохранить";
 			// 
-			// gMapControl1
+			// gmap
 			// 
-			this.gMapControl1.Bearing = 0F;
-			this.gMapControl1.CanDragMap = true;
-			this.gMapControl1.EmptyTileColor = System.Drawing.Color.Navy;
-			this.gMapControl1.GrayScaleMode = false;
-			this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
-			this.gMapControl1.LevelsKeepInMemmory = 5;
-			this.gMapControl1.Location = new System.Drawing.Point(903, 191);
-			this.gMapControl1.MarkersEnabled = true;
-			this.gMapControl1.MaxZoom = 2;
-			this.gMapControl1.MinZoom = 2;
-			this.gMapControl1.MouseWheelZoomEnabled = true;
-			this.gMapControl1.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
-			this.gMapControl1.Name = "gMapControl1";
-			this.gMapControl1.NegativeMode = false;
-			this.gMapControl1.PolygonsEnabled = true;
-			this.gMapControl1.RetryLoadTile = 0;
-			this.gMapControl1.RoutesEnabled = true;
-			this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
-			this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
-			this.gMapControl1.ShowTileGridLines = false;
-			this.gMapControl1.Size = new System.Drawing.Size(418, 427);
-			this.gMapControl1.TabIndex = 1;
-			this.gMapControl1.Zoom = 0D;
+			this.gmap.Bearing = 0F;
+			this.gmap.CanDragMap = true;
+			this.gmap.EmptyTileColor = System.Drawing.Color.Navy;
+			this.gmap.GrayScaleMode = false;
+			this.gmap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+			this.gmap.LevelsKeepInMemmory = 5;
+			this.gmap.Location = new System.Drawing.Point(903, 191);
+			this.gmap.MarkersEnabled = true;
+			this.gmap.MaxZoom = 18;
+			this.gmap.MinZoom = 2;
+			this.gmap.MouseWheelZoomEnabled = true;
+			this.gmap.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+			this.gmap.Name = "gmap";
+			this.gmap.NegativeMode = false;
+			this.gmap.PolygonsEnabled = true;
+			this.gmap.RetryLoadTile = 0;
+			this.gmap.RoutesEnabled = true;
+			this.gmap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+			this.gmap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+			this.gmap.ShowTileGridLines = false;
+			this.gmap.Size = new System.Drawing.Size(418, 427);
+			this.gmap.TabIndex = 1;
+			this.gmap.Zoom = 13D;
+			this.gmap.Load += new System.EventHandler(this.gmap_Load);
 			// 
 			// openFile
 			// 
@@ -129,7 +130,7 @@ namespace PolygonValidator
 			this.ClientSize = new System.Drawing.Size(1333, 630);
 			this.Controls.Add(this.findButton);
 			this.Controls.Add(this.playground);
-			this.Controls.Add(this.gMapControl1);
+			this.Controls.Add(this.gmap);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainForm";
@@ -148,7 +149,7 @@ namespace PolygonValidator
 		private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem открытьToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
-		private GMap.NET.WindowsForms.GMapControl gMapControl1;
+		private GMap.NET.WindowsForms.GMapControl gmap;
 		private System.Windows.Forms.OpenFileDialog openFile;
 		private System.Windows.Forms.PictureBox playground;
 		private System.Windows.Forms.Button findButton;
