@@ -1,7 +1,11 @@
-﻿using System;
+﻿using GMap.NET;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
@@ -9,7 +13,8 @@ namespace PolygonValidator
 {
 	public partial class MainForm : Form
 	{
-		private Point[] polygonPoints; 
+		private Point[] polygonPoints;
+		private List<PointLatLng> mapPoints;
 
 		public MainForm()
 		{
@@ -26,6 +31,16 @@ namespace PolygonValidator
 		{
 			//openFile.
 			string fileName = openFile.FileName;
+			//ReadTestPolygon(fileName);
+			ReadMapPolygon(fileName);
+
+			//DrawTestPolygon(this.polygonPoints);
+
+			DrawMapPolygon(this.mapPoints);
+		}
+
+		private void ReadTestPolygon(string fileName)
+		{
 			string[] stringPoints = File.ReadAllText(fileName).Split(new[] { ',' });
 			this.polygonPoints = new Point[stringPoints.Length];
 
@@ -38,11 +53,23 @@ namespace PolygonValidator
 					Y = int.Parse(coordinates[1])
 				};
 			}
-
-			DrawPolygon(this.polygonPoints);
 		}
 
-		private void DrawPolygon(Point[] polygonPoints)
+		private void ReadMapPolygon(string fileName)
+		{
+			string[] stringPoints = File.ReadAllText(fileName).Split(new[] { ',' });
+			this.mapPoints = new List<PointLatLng>();
+
+			for (int i = 0; i < stringPoints.Length; i++)
+			{
+				string[] coordinates = stringPoints[i].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+				this.mapPoints.Add(new PointLatLng(
+					double.Parse(coordinates[0], CultureInfo.InvariantCulture), 
+					double.Parse(coordinates[1], CultureInfo.InvariantCulture)));
+			}
+		}
+
+		private void DrawTestPolygon(Point[] polygonPoints)
 		{
 			playground.Image = new Bitmap(playground.Width, playground.Height);
 			using (Graphics g = Graphics.FromImage(playground.Image))
@@ -52,6 +79,17 @@ namespace PolygonValidator
 				Pen blackPen = new Pen(Color.Black, 1);
 				g.DrawLines(blackPen, polygonPoints);
 			}
+		}
+
+		private void DrawMapPolygon(List<PointLatLng> polygonPoints)
+		{
+			GMapOverlay polyOverlay = new GMapOverlay("polygons");
+			GMapPolygon polygon = new GMapPolygon(polygonPoints, "mypolygon");
+			polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
+			polygon.Stroke = new Pen(Color.Red, 1);
+			polyOverlay.Polygons.Add(polygon);
+			gmap.Overlays.Add(polyOverlay);
+			gmap.Refresh();
 		}
 
 		private void findButton_Click(object sender, EventArgs e)
@@ -191,14 +229,165 @@ namespace PolygonValidator
 		{
 			gmap.ShowCenter = false;
 			gmap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
-			GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
-			gmap.Position = new GMap.NET.PointLatLng(48.8589507, 2.2775175);
+			GMaps.Instance.Mode = AccessMode.ServerOnly;
+			gmap.Position = new PointLatLng(37.71169139127381, 55.629253022756586);
+
+			//GMapOverlay markersOverlay = new GMapOverlay("markers");
+			//GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(-25.966688, 32.580528),
+			//  GMarkerGoogleType.green);
+			//markersOverlay.Markers.Add(marker);
+			//gmap.Overlays.Add(markersOverlay);
+
+			//GMapOverlay polyOverlay = new GMapOverlay("polygons");
+			//List<PointLatLng> points = new List<PointLatLng>();
+			//points.Add(new PointLatLng(-25.969562, 32.585789));
+			//points.Add(new PointLatLng(-25.966205, 32.588171));
+			//points.Add(new PointLatLng(-25.968134, 32.591647));
+			//points.Add(new PointLatLng(-25.971684, 32.589759));
+			//GMapPolygon polygon = new GMapPolygon(points, "mypolygon");
+			//polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
+			//polygon.Stroke = new Pen(Color.Red, 1);
+			//polyOverlay.Polygons.Add(polygon);
+			//gmap.Overlays.Add(polyOverlay);
 
 			// load somewhere at default location
 			// once file is opened, draw polygon if data is valid
 			// find intersections by clicking the button
 			// delete intersections by clicking the button
 			// add color selector
+		}
+
+		private void findMap_Click(object sender, EventArgs e)
+		{
+			List<PointLatLng> intersections = new List<PointLatLng>();
+
+			for (int i = 0; i < this.mapPoints.Count - 4; i++)
+			{
+				PointLatLng? intersection = CheckForIntersection(
+					this.mapPoints[i],
+					this.mapPoints[i + 1],
+					this.mapPoints[i + 2],
+					this.mapPoints[i + 3]);
+
+				if (intersection != null)
+				{
+					intersections.Add(intersection.Value);
+				}
+			}
+
+			if (intersections.Count > 0)
+			{
+				HighlightIntersectionsMap(intersections);
+			}
+		}
+
+		private PointLatLng? CheckForIntersection(PointLatLng p1, PointLatLng p2, PointLatLng p3, PointLatLng p4)
+		{
+			// сортируем точки
+			if (p2.Lat < p1.Lat)
+			{
+				PointLatLng tmp = p1;
+				p1 = p2;
+				p2 = tmp;
+			}
+
+			if (p4.Lat < p3.Lat)
+			{
+				PointLatLng tmp = p3;
+				p3 = p4;
+				p4 = tmp;
+			}
+
+			//проверим существование потенциального интервала для точки пересечения отрезков
+			if (p2.Lat < p1.Lat)
+			{
+				//ибо у отрезков нету взаимной абсциссы
+				return null;
+			}
+
+			//найдём коэффициенты уравнений, содержащих отрезки
+			//f1(x) = A1*x + b1 = y
+			//f2(x) = A2*x + b2 = y
+			//если первый отрезок вертикальный
+			if (p1.Lat - p2.Lat == 0)
+			{
+				//найдём Xa, Ya - точки пересечения двух прямых
+				double resX = p1.Lat;
+				double tg = (p3.Lng - p4.Lng) / (p3.Lat - p4.Lat);
+				double shift = p3.Lng - tg * p4.Lat;
+
+				double resultY = tg * resX + shift;
+
+				if (p3.Lat <= resX &&
+					p4.Lat >= resX &&
+					Math.Min(p1.Lng, p2.Lng) <= resultY &&
+					Math.Max(p1.Lng, p2.Lng) >= resultY)
+				{
+					return new PointLatLng(resX, resultY);
+				}
+
+				return null;
+			}
+
+			//если второй отрезок вертикальный
+			if (p3.Lat - p4.Lat == 0)
+			{
+				//найдём Xa, Ya - точки пересечения двух прямых
+				double resX = p3.Lat;
+				double tg = (p1.Lng - p2.Lng) / (p1.Lat - p2.Lat);
+				double shift = p1.Lng - tg * p1.Lat;
+				double resultY = tg * resX + shift;
+
+				if (p1.Lat <= resX &&
+					p2.Lat >= resX &&
+					Math.Min(p3.Lng, p4.Lng) <= resultY &&
+					Math.Max(p3.Lng, p4.Lng) >= resultY)
+				{
+					return new PointLatLng(resX, resultY);
+				}
+
+				return null;
+			}
+
+			//оба отрезка невертикальные
+			double tg1 = (p1.Lng - p2.Lng) / (p1.Lat - p2.Lat);
+			double tg2 = (p3.Lng - p4.Lng) / (p3.Lat - p4.Lat);
+			double shift1 = p1.Lng - tg1 * p1.Lat;
+			double shift2 = p3.Lng - tg2 * p3.Lat;
+
+			if (tg1 == tg2)
+			{
+				//отрезки параллельны
+				return null;
+			}
+
+			//Xa - абсцисса точки пересечения двух прямых
+			double resultX = (shift2 - shift1) / (tg1 - tg2);
+
+			if ((resultX < Math.Max(p1.Lat, p3.Lat)) || (resultX > Math.Min(p2.Lat, p4.Lat)))
+			{
+				//точка Xa находится вне пересечения проекций отрезков на ось X
+				return null;
+			}
+			else
+			{
+				double resultY = tg1 * resultX + shift1;
+				return new PointLatLng(resultX, resultY);
+			}
+		}
+
+		private void HighlightIntersectionsMap(List<PointLatLng> intersections)
+		{
+			GMapOverlay markersOverlay = new GMapOverlay("markers");
+
+			intersections.ForEach(point =>
+			{
+				GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
+				markersOverlay.Markers.Add(marker);
+			});
+
+			gmap.Overlays.Add(markersOverlay);
+			gmap.Refresh();
 		}
 	}
 }

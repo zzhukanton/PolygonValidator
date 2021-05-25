@@ -37,6 +37,7 @@ namespace PolygonValidator
 			this.openFile = new System.Windows.Forms.OpenFileDialog();
 			this.playground = new System.Windows.Forms.PictureBox();
 			this.findButton = new System.Windows.Forms.Button();
+			this.findMap = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.playground)).BeginInit();
 			this.SuspendLayout();
@@ -48,7 +49,7 @@ namespace PolygonValidator
             this.файлToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1333, 30);
+			this.menuStrip1.Size = new System.Drawing.Size(1333, 28);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -58,7 +59,7 @@ namespace PolygonValidator
             this.открытьToolStripMenuItem,
             this.сохранитьToolStripMenuItem});
 			this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
+			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
 			this.файлToolStripMenuItem.Text = "Файл";
 			// 
 			// открытьToolStripMenuItem
@@ -82,7 +83,7 @@ namespace PolygonValidator
 			this.gmap.GrayScaleMode = false;
 			this.gmap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
 			this.gmap.LevelsKeepInMemmory = 5;
-			this.gmap.Location = new System.Drawing.Point(903, 191);
+			this.gmap.Location = new System.Drawing.Point(12, 31);
 			this.gmap.MarkersEnabled = true;
 			this.gmap.MaxZoom = 18;
 			this.gmap.MinZoom = 2;
@@ -96,7 +97,7 @@ namespace PolygonValidator
 			this.gmap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
 			this.gmap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
 			this.gmap.ShowTileGridLines = false;
-			this.gmap.Size = new System.Drawing.Size(418, 427);
+			this.gmap.Size = new System.Drawing.Size(1028, 587);
 			this.gmap.TabIndex = 1;
 			this.gmap.Zoom = 13D;
 			this.gmap.Load += new System.EventHandler(this.gmap_Load);
@@ -107,27 +108,38 @@ namespace PolygonValidator
 			// 
 			// playground
 			// 
-			this.playground.Location = new System.Drawing.Point(12, 31);
+			this.playground.Location = new System.Drawing.Point(1168, 55);
 			this.playground.Name = "playground";
-			this.playground.Size = new System.Drawing.Size(729, 587);
+			this.playground.Size = new System.Drawing.Size(122, 100);
 			this.playground.TabIndex = 2;
 			this.playground.TabStop = false;
 			// 
 			// findButton
 			// 
-			this.findButton.Location = new System.Drawing.Point(773, 55);
+			this.findButton.Location = new System.Drawing.Point(1066, 206);
 			this.findButton.Name = "findButton";
 			this.findButton.Size = new System.Drawing.Size(224, 94);
 			this.findButton.TabIndex = 3;
-			this.findButton.Text = "Найти точки пересечения";
+			this.findButton.Text = "Найти точки пересечения тест";
 			this.findButton.UseVisualStyleBackColor = true;
 			this.findButton.Click += new System.EventHandler(this.findButton_Click);
+			// 
+			// findMap
+			// 
+			this.findMap.Location = new System.Drawing.Point(1066, 359);
+			this.findMap.Name = "findMap";
+			this.findMap.Size = new System.Drawing.Size(224, 94);
+			this.findMap.TabIndex = 4;
+			this.findMap.Text = "Найти точки пересечения карта";
+			this.findMap.UseVisualStyleBackColor = true;
+			this.findMap.Click += new System.EventHandler(this.findMap_Click);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1333, 630);
+			this.Controls.Add(this.findMap);
 			this.Controls.Add(this.findButton);
 			this.Controls.Add(this.playground);
 			this.Controls.Add(this.gmap);
@@ -153,6 +165,7 @@ namespace PolygonValidator
 		private System.Windows.Forms.OpenFileDialog openFile;
 		private System.Windows.Forms.PictureBox playground;
 		private System.Windows.Forms.Button findButton;
+		private System.Windows.Forms.Button findMap;
 	}
 }
 
