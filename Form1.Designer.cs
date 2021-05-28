@@ -33,21 +33,21 @@ namespace PolygonValidator
 			this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.gmap = new GMap.NET.WindowsForms.GMapControl();
-			this.openFile = new System.Windows.Forms.OpenFileDialog();
-			this.playground = new System.Windows.Forms.PictureBox();
-			this.findMap = new System.Windows.Forms.Button();
-			this.fixButton = new System.Windows.Forms.Button();
 			this.сохранитьКакToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.сохранитьДляQGISToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.информацияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.gmap = new GMap.NET.WindowsForms.GMapControl();
+			this.openFile = new System.Windows.Forms.OpenFileDialog();
+			this.playground = new System.Windows.Forms.PictureBox();
+			this.findMap = new System.Windows.Forms.Button();
+			this.fixButton = new System.Windows.Forms.Button();
 			this.details = new System.Windows.Forms.GroupBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.playground)).BeginInit();
 			this.details.SuspendLayout();
@@ -90,6 +90,38 @@ namespace PolygonValidator
 			this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
 			this.сохранитьToolStripMenuItem.Text = "Сохранить";
 			// 
+			// сохранитьКакToolStripMenuItem
+			// 
+			this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
+			this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
+			this.сохранитьКакToolStripMenuItem.Text = "Сохранить как...";
+			// 
+			// сохранитьДляQGISToolStripMenuItem
+			// 
+			this.сохранитьДляQGISToolStripMenuItem.Name = "сохранитьДляQGISToolStripMenuItem";
+			this.сохранитьДляQGISToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
+			this.сохранитьДляQGISToolStripMenuItem.Text = "Сохранить для QGIS";
+			// 
+			// выходToolStripMenuItem
+			// 
+			this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
+			this.выходToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
+			this.выходToolStripMenuItem.Text = "Выход";
+			// 
+			// оПрограммеToolStripMenuItem
+			// 
+			this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.информацияToolStripMenuItem});
+			this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
+			this.оПрограммеToolStripMenuItem.Text = "О программе";
+			// 
+			// информацияToolStripMenuItem
+			// 
+			this.информацияToolStripMenuItem.Name = "информацияToolStripMenuItem";
+			this.информацияToolStripMenuItem.Size = new System.Drawing.Size(185, 26);
+			this.информацияToolStripMenuItem.Text = "Информация";
+			// 
 			// gmap
 			// 
 			this.gmap.Bearing = 0F;
@@ -112,7 +144,7 @@ namespace PolygonValidator
 			this.gmap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
 			this.gmap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
 			this.gmap.ShowTileGridLines = false;
-			this.gmap.Size = new System.Drawing.Size(1028, 587);
+			this.gmap.Size = new System.Drawing.Size(1028, 697);
 			this.gmap.TabIndex = 1;
 			this.gmap.Zoom = 13D;
 			this.gmap.Load += new System.EventHandler(this.gmap_Load);
@@ -148,38 +180,6 @@ namespace PolygonValidator
 			this.fixButton.Text = "Сгладить точки самопересечения";
 			this.fixButton.UseVisualStyleBackColor = true;
 			// 
-			// сохранитьКакToolStripMenuItem
-			// 
-			this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
-			this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
-			this.сохранитьКакToolStripMenuItem.Text = "Сохранить как...";
-			// 
-			// сохранитьДляQGISToolStripMenuItem
-			// 
-			this.сохранитьДляQGISToolStripMenuItem.Name = "сохранитьДляQGISToolStripMenuItem";
-			this.сохранитьДляQGISToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
-			this.сохранитьДляQGISToolStripMenuItem.Text = "Сохранить для QGIS";
-			// 
-			// выходToolStripMenuItem
-			// 
-			this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-			this.выходToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
-			this.выходToolStripMenuItem.Text = "Выход";
-			// 
-			// оПрограммеToolStripMenuItem
-			// 
-			this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.информацияToolStripMenuItem});
-			this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
-			this.оПрограммеToolStripMenuItem.Text = "О программе";
-			// 
-			// информацияToolStripMenuItem
-			// 
-			this.информацияToolStripMenuItem.Name = "информацияToolStripMenuItem";
-			this.информацияToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-			this.информацияToolStripMenuItem.Text = "Информация";
-			// 
 			// details
 			// 
 			this.details.Controls.Add(this.label4);
@@ -188,37 +188,10 @@ namespace PolygonValidator
 			this.details.Controls.Add(this.label1);
 			this.details.Location = new System.Drawing.Point(1046, 277);
 			this.details.Name = "details";
-			this.details.Size = new System.Drawing.Size(224, 341);
+			this.details.Size = new System.Drawing.Size(224, 212);
 			this.details.TabIndex = 6;
 			this.details.TabStop = false;
 			this.details.Text = "Подробная информация";
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(6, 57);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(125, 17);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Средняя глубина:";
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(6, 93);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(125, 17);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "Береговая линия:";
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(6, 134);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(76, 17);
-			this.label3.TabIndex = 2;
-			this.label3.Text = "Площадь: ";
 			// 
 			// label4
 			// 
@@ -229,11 +202,38 @@ namespace PolygonValidator
 			this.label4.TabIndex = 3;
 			this.label4.Text = "Размеры: ";
 			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(6, 134);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(76, 17);
+			this.label3.TabIndex = 2;
+			this.label3.Text = "Площадь: ";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(6, 93);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(125, 17);
+			this.label2.TabIndex = 1;
+			this.label2.Text = "Береговая линия:";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(6, 57);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(125, 17);
+			this.label1.TabIndex = 0;
+			this.label1.Text = "Средняя глубина:";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1333, 630);
+			this.ClientSize = new System.Drawing.Size(1333, 740);
 			this.Controls.Add(this.details);
 			this.Controls.Add(this.fixButton);
 			this.Controls.Add(this.findMap);

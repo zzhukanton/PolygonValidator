@@ -13,11 +13,11 @@ namespace PolygonValidator
 {
 	public partial class MainForm : Form
 	{
-		private List<Polygon> polygons;
+		private readonly List<Polygon> polygons;
 
 		public MainForm()
 		{
-			InitializeComponent();
+			this.InitializeComponent();
 
 			this.polygons = new List<Polygon>();
 		}
@@ -67,9 +67,11 @@ namespace PolygonValidator
 
 			foreach (var polygon in polygons)
 			{
-				GMapPolygon mapPolygon = new GMapPolygon(polygon.Points, "mypolygon");
-				mapPolygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
-				mapPolygon.Stroke = new Pen(Color.Red, 1);
+				GMapPolygon mapPolygon = new GMapPolygon(polygon.Points, "mypolygon")
+				{
+					Fill = new SolidBrush(Color.FromArgb(50, Color.Red)),
+					Stroke = new Pen(Color.Red, 1)
+				};
 				polyOverlay.Polygons.Add(mapPolygon);
 			}
 			
@@ -93,7 +95,7 @@ namespace PolygonValidator
 
 				for (int i = 0; i < polygon.Points.Count - 4; i++)
 				{
-					PointLatLng? intersection = CheckForIntersection(
+					PointLatLng? intersection = this.CheckForIntersection(
 						polygon.Points[i],
 						polygon.Points[i + 1],
 						polygon.Points[i + 2],
@@ -107,7 +109,7 @@ namespace PolygonValidator
 
 				if (intersections.Count > 0)
 				{
-					HighlightIntersectionsMap(intersections);
+					this.HighlightIntersectionsMap(intersections);
 				}
 			}
 		}
@@ -214,6 +216,7 @@ namespace PolygonValidator
 			intersections.ForEach(point =>
 			{
 				GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
+				marker.ToolTipText = point.ToString();
 				markersOverlay.Markers.Add(marker);
 			});
 
@@ -273,7 +276,7 @@ namespace PolygonValidator
 
 			for (int i = 0; i < this.polygonPoints.Length - 4; i++)
 			{
-				Point? intersection = CheckForIntersection(
+				Point? intersection = this.CheckForIntersection(
 					(PointF)this.polygonPoints[i],
 					(PointF)this.polygonPoints[i + 1],
 					(PointF)this.polygonPoints[i + 2],
@@ -287,7 +290,7 @@ namespace PolygonValidator
 
 			if (intersections.Count > 0)
 			{
-				HighlightIntersections(intersections);
+				this.HighlightIntersections(intersections);
 			}
 		}
 
