@@ -14,12 +14,23 @@ namespace PolygonValidator
 	public partial class MainForm : Form
 	{
 		private readonly List<Polygon> polygons;
+		private readonly List<Polygon> updatedPolygons;
+
+		private bool showIntersections;
+		private List<GMapOverlay> markersOverlays;
+
+		private const string HidePointsButtonText = "Скрыть точки самопересечений";
+		private const string ShowPointsButtonText = "Показать точки самопересечений";
+
+
 
 		public MainForm()
 		{
 			this.InitializeComponent();
 
 			this.polygons = new List<Polygon>();
+			this.updatedPolygons = new List<Polygon>();
+			this.markersOverlays = new List<GMapOverlay>();
 		}
 
 		private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -76,7 +87,7 @@ namespace PolygonValidator
 			}
 			
 			gmap.Overlays.Add(polyOverlay);
-			gmap.Refresh();
+			//gmap.Refresh();
 		}
 
 		private void gmap_Load(object sender, EventArgs e)
@@ -89,6 +100,23 @@ namespace PolygonValidator
 
 		private void findMap_Click(object sender, EventArgs e)
 		{
+			if (this.polygons.Count == 0)
+			{
+				MessageBox.Show("Данные полигонов не были загружены!", "Ошибка",MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (this.showIntersections)
+			{
+				findMap.Text = ShowPointsButtonText;
+				this.showIntersections = false;
+
+				//this.markersOverlays.ForEach(overlay => gmap.Overlays.Clear());
+				gmap.Overlays.Clear();
+				//gmap.Overlays.Remove(this.markersOverlay);
+				//gmap.Refresh();
+			}
+
 			foreach (var polygon in this.polygons)
 			{
 				List<PointLatLng> intersections = new List<PointLatLng>();
@@ -110,8 +138,12 @@ namespace PolygonValidator
 				if (intersections.Count > 0)
 				{
 					this.HighlightIntersectionsMap(intersections);
+					polygon.Intersecions = intersections;
 				}
 			}
+
+			this.showIntersections = true;
+			findMap.Text = HidePointsButtonText;
 		}
 
 		private PointLatLng? CheckForIntersection(PointLatLng p1, PointLatLng p2, PointLatLng p3, PointLatLng p4)
@@ -215,13 +247,16 @@ namespace PolygonValidator
 
 			intersections.ForEach(point =>
 			{
-				GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
-				marker.ToolTipText = point.ToString();
+				GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.green)
+				{
+					ToolTipText = point.ToString()
+				};
 				markersOverlay.Markers.Add(marker);
 			});
 
 			gmap.Overlays.Add(markersOverlay);
-			gmap.Refresh();
+			this.markersOverlays.Add(markersOverlay);
+			//gmap.Refresh();
 		}
 
 		#region Test code for test polygons

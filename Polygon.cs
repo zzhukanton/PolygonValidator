@@ -24,6 +24,8 @@ namespace PolygonValidator
 
 		public List<PointLatLng> Points { get; set; }
 
+		public List<PointLatLng> Intersecions { get; set; }
+
 		public static string GetValueFromString(string key, string input)
 		{
 			int index = input.IndexOf(key);
