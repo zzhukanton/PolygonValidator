@@ -28,6 +28,8 @@ namespace PolygonValidator
 		{
 			this.InitializeComponent();
 
+			fixButton.Enabled = false;
+
 			this.polygons = new List<Polygon>();
 			this.updatedPolygons = new List<Polygon>();
 			this.markersOverlays = new List<GMapOverlay>();
@@ -69,12 +71,23 @@ namespace PolygonValidator
 					Size = Polygon.GetValueFromString(Polygon.SizePrefix, allSinglePolygonData[5]),
 					Points = polygonPoints
 				});
+
+				this.updatedPolygons.Add(new Polygon
+				{
+					Name = Polygon.GetValueFromString(Polygon.NamePrefix, allSinglePolygonData[1]),
+					AverageDepth = Polygon.GetValueFromString(Polygon.AverageDepthPrefix, allSinglePolygonData[2]),
+					Coastline = Polygon.GetValueFromString(Polygon.CoastlinePrefix, allSinglePolygonData[3]),
+					Square = Polygon.GetValueFromString(Polygon.SquarePrefix, allSinglePolygonData[4]),
+					Size = Polygon.GetValueFromString(Polygon.SizePrefix, allSinglePolygonData[5]),
+					Points = new List<PointLatLng>(polygonPoints)
+				});
 			}
 		}
 
 		private void DrawPolygons(List<Polygon> polygons)
 		{
 			GMapOverlay polyOverlay = new GMapOverlay("polygons");
+			GMapOverlay dotsOverlay = new GMapOverlay("dots");
 
 			foreach (var polygon in polygons)
 			{
@@ -84,8 +97,15 @@ namespace PolygonValidator
 					Stroke = new Pen(Color.Red, 1)
 				};
 				polyOverlay.Polygons.Add(mapPolygon);
+				int i = 0;
+				polygon.Points.ForEach(point => dotsOverlay.Markers.Add(new GMarkerGoogle(point, GMarkerGoogleType.black_small)
+				{
+					ToolTipText = $"{i++}: {point}"  
+				}));
 			}
-			
+
+			gmap.Overlays.Add(dotsOverlay);
+
 			gmap.Overlays.Add(polyOverlay);
 			//gmap.Refresh();
 		}
@@ -112,38 +132,45 @@ namespace PolygonValidator
 				this.showIntersections = false;
 
 				//this.markersOverlays.ForEach(overlay => gmap.Overlays.Clear());
-				gmap.Overlays.Clear();
+				//gmap.Overlays.Clear();
 				//gmap.Overlays.Remove(this.markersOverlay);
 				//gmap.Refresh();
 			}
 
-			foreach (var polygon in this.polygons)
+			for (int index = 0; index < this.polygons.Count; index++)
 			{
 				List<PointLatLng> intersections = new List<PointLatLng>();
+				int length = this.polygons[index].Points.Count;
+				List<PointLatLng> pointsToDelete = new List<PointLatLng>();
 
-				for (int i = 0; i < polygon.Points.Count - 4; i++)
+				for (int i = 0; i < length - 4; i++)
 				{
 					PointLatLng? intersection = this.CheckForIntersection(
-						polygon.Points[i],
-						polygon.Points[i + 1],
-						polygon.Points[i + 2],
-						polygon.Points[i + 3]);
+						this.polygons[index].Points[i],
+						this.polygons[index].Points[i + 1],
+						this.polygons[index].Points[i + 2],
+						this.polygons[index].Points[i + 3]);
 
 					if (intersection != null)
 					{
 						intersections.Add(intersection.Value);
+						pointsToDelete.Add(this.polygons[index].Points[i + 1]);
+						pointsToDelete.Add(this.polygons[index].Points[i + 2]);
 					}
 				}
 
 				if (intersections.Count > 0)
 				{
 					this.HighlightIntersectionsMap(intersections);
-					polygon.Intersecions = intersections;
+					this.polygons[index].Intersecions = intersections;
+
+					pointsToDelete.ForEach(point => this.updatedPolygons[index].Points.Remove(point));
 				}
 			}
 
 			this.showIntersections = true;
 			findMap.Text = HidePointsButtonText;
+			fixButton.Enabled = true;
 		}
 
 		private PointLatLng? CheckForIntersection(PointLatLng p1, PointLatLng p2, PointLatLng p3, PointLatLng p4)
@@ -426,5 +453,12 @@ namespace PolygonValidator
 
 
 		#endregion
+
+		private void fixButton_Click(object sender, EventArgs e)
+		{
+			gmap.Overlays.Clear();
+
+			DrawPolygons(this.updatedPolygons);
+		}
 	}
 }

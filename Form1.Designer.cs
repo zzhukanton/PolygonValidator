@@ -179,6 +179,7 @@ namespace PolygonValidator
 			this.fixButton.TabIndex = 5;
 			this.fixButton.Text = "Сгладить точки самопересечения";
 			this.fixButton.UseVisualStyleBackColor = true;
+			this.fixButton.Click += new System.EventHandler(this.fixButton_Click);
 			// 
 			// details
 			// 
