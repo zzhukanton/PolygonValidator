@@ -18,11 +18,10 @@ namespace PolygonValidator
 
 		private bool showIntersections;
 		private List<GMapOverlay> markersOverlays;
+		private string currentFilename;
 
 		private const string HidePointsButtonText = "Скрыть точки самопересечений";
 		private const string ShowPointsButtonText = "Показать точки самопересечений";
-
-
 
 		public MainForm()
 		{
@@ -46,7 +45,9 @@ namespace PolygonValidator
 
 		private void openFile_FileOk(object sender, CancelEventArgs e)
 		{
-			this.ReadMapPolygon(openFile.FileName);
+			this.currentFilename = openFile.FileName;
+
+			this.ReadMapPolygon(this.currentFilename);
 			this.DrawPolygons(this.polygons);
 
 			fixButton.Enabled = true;
@@ -305,5 +306,10 @@ namespace PolygonValidator
 		}
 
 		private void exit_Click(object sender, EventArgs e) => this.Close();
+
+		private void save_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

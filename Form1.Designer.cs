@@ -96,6 +96,7 @@ namespace PolygonValidator
 			this.save.Name = "save";
 			this.save.Size = new System.Drawing.Size(231, 26);
 			this.save.Text = "Сохранить";
+			this.save.Click += new System.EventHandler(this.save_Click);
 			// 
 			// saveAs
 			// 
