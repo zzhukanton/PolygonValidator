@@ -291,7 +291,19 @@ namespace PolygonValidator
 
 		private void closeCurrent_Click(object sender, EventArgs e)
 		{
+			gmap.Overlays.Clear();
 
+			fixButton.Enabled = false;
+			save.Enabled = false;
+			saveAs.Enabled = false;
+			saveQGIS.Enabled = false;
+			closeCurrent.Enabled = false;
+
+			this.polygons.Clear();
+			this.updatedPolygons.Clear();
+			this.markersOverlays.Clear();
 		}
+
+		private void exit_Click(object sender, EventArgs e) => this.Close();
 	}
 }

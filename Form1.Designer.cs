@@ -32,6 +32,7 @@ namespace PolygonValidator
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.closeCurrent = new System.Windows.Forms.ToolStripMenuItem();
 			this.save = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveAs = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveQGIS = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,7 +48,6 @@ namespace PolygonValidator
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
-			this.closeCurrent = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.details.SuspendLayout();
 			this.SuspendLayout();
@@ -60,7 +60,7 @@ namespace PolygonValidator
             this.оПрограммеToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1333, 30);
+			this.menuStrip1.Size = new System.Drawing.Size(1333, 28);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -74,7 +74,7 @@ namespace PolygonValidator
             this.saveQGIS,
             this.exit});
 			this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
+			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
 			this.файлToolStripMenuItem.Text = "Файл";
 			// 
 			// открытьToolStripMenuItem
@@ -83,6 +83,13 @@ namespace PolygonValidator
 			this.открытьToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
 			this.открытьToolStripMenuItem.Text = "Открыть";
 			this.открытьToolStripMenuItem.Click += new System.EventHandler(this.открытьToolStripMenuItem_Click);
+			// 
+			// closeCurrent
+			// 
+			this.closeCurrent.Name = "closeCurrent";
+			this.closeCurrent.Size = new System.Drawing.Size(231, 26);
+			this.closeCurrent.Text = "Закрыть текущий";
+			this.closeCurrent.Click += new System.EventHandler(this.closeCurrent_Click);
 			// 
 			// save
 			// 
@@ -107,13 +114,14 @@ namespace PolygonValidator
 			this.exit.Name = "exit";
 			this.exit.Size = new System.Drawing.Size(231, 26);
 			this.exit.Text = "Выход";
+			this.exit.Click += new System.EventHandler(this.exit_Click);
 			// 
 			// оПрограммеToolStripMenuItem
 			// 
 			this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.информацияToolStripMenuItem});
 			this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 26);
+			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
 			this.оПрограммеToolStripMenuItem.Text = "О программе";
 			// 
 			// информацияToolStripMenuItem
@@ -221,13 +229,6 @@ namespace PolygonValidator
 			this.label1.Size = new System.Drawing.Size(125, 17);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Средняя глубина:";
-			// 
-			// closeCurrent
-			// 
-			this.closeCurrent.Name = "closeCurrent";
-			this.closeCurrent.Size = new System.Drawing.Size(231, 26);
-			this.closeCurrent.Text = "Закрыть текущий";
-			this.closeCurrent.Click += new System.EventHandler(this.closeCurrent_Click);
 			// 
 			// MainForm
 			// 
