@@ -32,15 +32,14 @@ namespace PolygonValidator
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.сохранитьКакToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.сохранитьДляQGISToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.save = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveAs = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveQGIS = new System.Windows.Forms.ToolStripMenuItem();
+			this.exit = new System.Windows.Forms.ToolStripMenuItem();
 			this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.информацияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.gmap = new GMap.NET.WindowsForms.GMapControl();
 			this.openFile = new System.Windows.Forms.OpenFileDialog();
-			this.playground = new System.Windows.Forms.PictureBox();
 			this.findMap = new System.Windows.Forms.Button();
 			this.fixButton = new System.Windows.Forms.Button();
 			this.details = new System.Windows.Forms.GroupBox();
@@ -48,8 +47,8 @@ namespace PolygonValidator
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
+			this.closeCurrent = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.playground)).BeginInit();
 			this.details.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -61,7 +60,7 @@ namespace PolygonValidator
             this.оПрограммеToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1333, 28);
+			this.menuStrip1.Size = new System.Drawing.Size(1333, 30);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -69,12 +68,13 @@ namespace PolygonValidator
 			// 
 			this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.открытьToolStripMenuItem,
-            this.сохранитьToolStripMenuItem,
-            this.сохранитьКакToolStripMenuItem,
-            this.сохранитьДляQGISToolStripMenuItem,
-            this.выходToolStripMenuItem});
+            this.closeCurrent,
+            this.save,
+            this.saveAs,
+            this.saveQGIS,
+            this.exit});
 			this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
 			this.файлToolStripMenuItem.Text = "Файл";
 			// 
 			// открытьToolStripMenuItem
@@ -84,36 +84,36 @@ namespace PolygonValidator
 			this.открытьToolStripMenuItem.Text = "Открыть";
 			this.открытьToolStripMenuItem.Click += new System.EventHandler(this.открытьToolStripMenuItem_Click);
 			// 
-			// сохранитьToolStripMenuItem
+			// save
 			// 
-			this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-			this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
-			this.сохранитьToolStripMenuItem.Text = "Сохранить";
+			this.save.Name = "save";
+			this.save.Size = new System.Drawing.Size(231, 26);
+			this.save.Text = "Сохранить";
 			// 
-			// сохранитьКакToolStripMenuItem
+			// saveAs
 			// 
-			this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
-			this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
-			this.сохранитьКакToolStripMenuItem.Text = "Сохранить как...";
+			this.saveAs.Name = "saveAs";
+			this.saveAs.Size = new System.Drawing.Size(231, 26);
+			this.saveAs.Text = "Сохранить как...";
 			// 
-			// сохранитьДляQGISToolStripMenuItem
+			// saveQGIS
 			// 
-			this.сохранитьДляQGISToolStripMenuItem.Name = "сохранитьДляQGISToolStripMenuItem";
-			this.сохранитьДляQGISToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
-			this.сохранитьДляQGISToolStripMenuItem.Text = "Сохранить для QGIS";
+			this.saveQGIS.Name = "saveQGIS";
+			this.saveQGIS.Size = new System.Drawing.Size(231, 26);
+			this.saveQGIS.Text = "Сохранить для QGIS";
 			// 
-			// выходToolStripMenuItem
+			// exit
 			// 
-			this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-			this.выходToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
-			this.выходToolStripMenuItem.Text = "Выход";
+			this.exit.Name = "exit";
+			this.exit.Size = new System.Drawing.Size(231, 26);
+			this.exit.Text = "Выход";
 			// 
 			// оПрограммеToolStripMenuItem
 			// 
 			this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.информацияToolStripMenuItem});
 			this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
+			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 26);
 			this.оПрограммеToolStripMenuItem.Text = "О программе";
 			// 
 			// информацияToolStripMenuItem
@@ -152,14 +152,6 @@ namespace PolygonValidator
 			// openFile
 			// 
 			this.openFile.FileOk += new System.ComponentModel.CancelEventHandler(this.openFile_FileOk);
-			// 
-			// playground
-			// 
-			this.playground.Location = new System.Drawing.Point(1292, 42);
-			this.playground.Name = "playground";
-			this.playground.Size = new System.Drawing.Size(122, 100);
-			this.playground.TabIndex = 2;
-			this.playground.TabStop = false;
 			// 
 			// findMap
 			// 
@@ -230,6 +222,13 @@ namespace PolygonValidator
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Средняя глубина:";
 			// 
+			// closeCurrent
+			// 
+			this.closeCurrent.Name = "closeCurrent";
+			this.closeCurrent.Size = new System.Drawing.Size(231, 26);
+			this.closeCurrent.Text = "Закрыть текущий";
+			this.closeCurrent.Click += new System.EventHandler(this.closeCurrent_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -238,7 +237,6 @@ namespace PolygonValidator
 			this.Controls.Add(this.details);
 			this.Controls.Add(this.fixButton);
 			this.Controls.Add(this.findMap);
-			this.Controls.Add(this.playground);
 			this.Controls.Add(this.gmap);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
@@ -246,7 +244,6 @@ namespace PolygonValidator
 			this.Text = "Валидатор полигонов";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.playground)).EndInit();
 			this.details.ResumeLayout(false);
 			this.details.PerformLayout();
 			this.ResumeLayout(false);
@@ -259,15 +256,14 @@ namespace PolygonValidator
 		private System.Windows.Forms.MenuStrip menuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem открытьToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem save;
 		private GMap.NET.WindowsForms.GMapControl gmap;
 		private System.Windows.Forms.OpenFileDialog openFile;
-		private System.Windows.Forms.PictureBox playground;
 		private System.Windows.Forms.Button findMap;
 		private System.Windows.Forms.Button fixButton;
-		private System.Windows.Forms.ToolStripMenuItem сохранитьКакToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem сохранитьДляQGISToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveAs;
+		private System.Windows.Forms.ToolStripMenuItem saveQGIS;
+		private System.Windows.Forms.ToolStripMenuItem exit;
 		private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem информацияToolStripMenuItem;
 		private System.Windows.Forms.GroupBox details;
@@ -275,6 +271,7 @@ namespace PolygonValidator
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.ToolStripMenuItem closeCurrent;
 	}
 }
 
