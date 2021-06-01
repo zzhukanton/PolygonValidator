@@ -48,6 +48,7 @@ namespace PolygonValidator
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
+			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
 			this.menuStrip1.SuspendLayout();
 			this.details.SuspendLayout();
 			this.SuspendLayout();
@@ -103,12 +104,14 @@ namespace PolygonValidator
 			this.saveAs.Name = "saveAs";
 			this.saveAs.Size = new System.Drawing.Size(231, 26);
 			this.saveAs.Text = "Сохранить как...";
+			this.saveAs.Click += new System.EventHandler(this.saveAs_Click);
 			// 
 			// saveQGIS
 			// 
 			this.saveQGIS.Name = "saveQGIS";
 			this.saveQGIS.Size = new System.Drawing.Size(231, 26);
 			this.saveQGIS.Text = "Сохранить для QGIS";
+			this.saveQGIS.Click += new System.EventHandler(this.saveQGIS_Click);
 			// 
 			// exit
 			// 
@@ -231,6 +234,10 @@ namespace PolygonValidator
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Средняя глубина:";
 			// 
+			// saveFileDialog1
+			// 
+			this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -274,6 +281,7 @@ namespace PolygonValidator
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ToolStripMenuItem closeCurrent;
+		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
 	}
 }
 

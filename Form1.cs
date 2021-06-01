@@ -312,5 +312,27 @@ namespace PolygonValidator
 			PolygonSerializer serializer = new PolygonSerializer();
 			serializer.SavePolygons(this.currentFilename, updatedPolygons);
 		}
+
+		private void saveAs_Click(object sender, EventArgs e)
+		{
+			saveFileDialog1.DefaultExt = "txt";
+			saveFileDialog1.FileName = "new csv";
+			saveFileDialog1.Filter = "Comma-separated values (.csv)|*.csv|Normal text file (.txt)|*.txt";
+			saveFileDialog1.ShowDialog();
+		}
+
+		private void saveQGIS_Click(object sender, EventArgs e)
+		{
+			saveFileDialog1.DefaultExt = "csv";
+			saveFileDialog1.FileName = "new csv";
+			saveFileDialog1.Filter = "Comma-separated values (.csv)|*.csv";
+			saveFileDialog1.ShowDialog();
+		}
+
+		private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+		{
+			PolygonSerializer serializer = new PolygonSerializer();
+			serializer.SavePolygonsAsQGIS(saveFileDialog1.FileName, updatedPolygons);
+		}
 	}
 }
