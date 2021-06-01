@@ -309,7 +309,8 @@ namespace PolygonValidator
 
 		private void save_Click(object sender, EventArgs e)
 		{
-
+			PolygonSerializer serializer = new PolygonSerializer();
+			serializer.SavePolygons(this.currentFilename, updatedPolygons);
 		}
 	}
 }

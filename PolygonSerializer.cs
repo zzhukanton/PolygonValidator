@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace PolygonValidator
 		private string qgisFormat = $"WKT,id,Название,Ср гл (м),Бр л (км),Площ (км2),\"Размер, км\"";
 
 		public string BasicFormat => basicFormat;
+		public string QGISFormat { get; set; }
 
 		public PolygonSerializer()
 		{
@@ -20,13 +22,33 @@ namespace PolygonValidator
 
 		public bool SavePolygons(string filename, List<Polygon> polygons)
 		{
+			StringBuilder polygonsData = new StringBuilder();
+			int i = 1;
 
+			polygons.ForEach(polygon =>
+			{
+				StringBuilder pointsData = new StringBuilder();
+				polygon.Points.ForEach(point => pointsData.AppendLine(FormattableString.Invariant($"{point.Lat}\t{point.Lng}")));
+
+				polygonsData.Append(string.Format(
+					basicFormat,
+					i++,
+					polygon.Name,
+					polygon.AverageDepth,
+					polygon.Coastline,
+					polygon.Square,
+					polygon.Size,
+					pointsData.ToString()));
+			});
+
+			File.WriteAllText(filename, polygonsData.ToString());
 
 			return true;
 		}
 
 		public bool SavePolygonsAsQGIS(string filename, List<Polygon> polygons)
 		{
+
 
 			return true;
 		}
