@@ -333,6 +333,7 @@ namespace PolygonValidator
 		{
 			PolygonSerializer serializer = new PolygonSerializer();
 			serializer.SavePolygonsAsQGIS(saveFileDialog1.FileName, updatedPolygons);
+			MessageBox.Show("Файл сохранен успешно!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 	}
 }
