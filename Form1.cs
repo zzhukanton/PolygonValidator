@@ -22,6 +22,11 @@ namespace PolygonValidator
 
 		private const string HidePointsButtonText = "Скрыть точки самопересечений";
 		private const string ShowPointsButtonText = "Показать точки самопересечений";
+		private const string NameText = "Название: {0}";
+		private const string AverageDepthText = "Средняя глубина: {0}";
+		private const string CoastlineText = "Береговая линия: {0}";
+		private const string SquareText = "Площадь: {0}";
+		private const string SizeText = "Размеры: {0}";
 
 		public MainForm()
 		{
@@ -98,18 +103,22 @@ namespace PolygonValidator
 		private void DrawPolygons(List<Polygon> polygons)
 		{
 			GMapOverlay polyOverlay = new GMapOverlay("polygons");
+			int i = 1;
 
 			foreach (var polygon in polygons)
 			{
-				GMapPolygon mapPolygon = new GMapPolygon(polygon.Points, "mypolygon")
+				GMapPolygon mapPolygon = new GMapPolygon(polygon.Points, polygon.Name)
 				{
 					Fill = new SolidBrush(Color.FromArgb(50, Color.Red)),
-					Stroke = new Pen(Color.Red, 1)
+					Stroke = new Pen(Color.Red, 1),
+					IsHitTestVisible = true
 				};
+				
 				polyOverlay.Polygons.Add(mapPolygon);
 			}
 
 			gmap.Overlays.Add(polyOverlay);
+			
 		}
 
 		private void gmap_Load(object sender, EventArgs e)
@@ -303,6 +312,8 @@ namespace PolygonValidator
 			this.polygons.Clear();
 			this.updatedPolygons.Clear();
 			this.markersOverlays.Clear();
+
+			// clear labels with data
 		}
 
 		private void exit_Click(object sender, EventArgs e) => this.Close();
@@ -334,6 +345,17 @@ namespace PolygonValidator
 			PolygonSerializer serializer = new PolygonSerializer();
 			serializer.SavePolygonsAsQGIS(saveFileDialog1.FileName, updatedPolygons);
 			MessageBox.Show("Файл сохранен успешно!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+
+		private void gmap_OnPolygonClick(GMapPolygon item, MouseEventArgs e)
+		{
+			Polygon polygon = this.polygons.Find(p => p.Name == item.Name);
+
+			name.Text = string.Format(NameText, polygon.Name);
+			depth.Text = string.Format(AverageDepthText, polygon.AverageDepth);
+			coast.Text = string.Format(CoastlineText, polygon.Coastline);
+			square.Text = string.Format(SquareText, polygon.Square);
+			size.Text = string.Format(SizeText, polygon.Size);
 		}
 	}
 }

@@ -44,11 +44,12 @@ namespace PolygonValidator
 			this.findMap = new System.Windows.Forms.Button();
 			this.fixButton = new System.Windows.Forms.Button();
 			this.details = new System.Windows.Forms.GroupBox();
-			this.label4 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label1 = new System.Windows.Forms.Label();
+			this.size = new System.Windows.Forms.Label();
+			this.square = new System.Windows.Forms.Label();
+			this.coast = new System.Windows.Forms.Label();
+			this.depth = new System.Windows.Forms.Label();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+			this.name = new System.Windows.Forms.Label();
 			this.menuStrip1.SuspendLayout();
 			this.details.SuspendLayout();
 			this.SuspendLayout();
@@ -61,7 +62,7 @@ namespace PolygonValidator
             this.оПрограммеToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1333, 28);
+			this.menuStrip1.Size = new System.Drawing.Size(1333, 30);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -75,7 +76,7 @@ namespace PolygonValidator
             this.saveQGIS,
             this.exit});
 			this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
 			this.файлToolStripMenuItem.Text = "Файл";
 			// 
 			// открытьToolStripMenuItem
@@ -125,7 +126,7 @@ namespace PolygonValidator
 			this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.информацияToolStripMenuItem});
 			this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
+			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 26);
 			this.оПрограммеToolStripMenuItem.Text = "О программе";
 			// 
 			// информацияToolStripMenuItem
@@ -159,6 +160,7 @@ namespace PolygonValidator
 			this.gmap.Size = new System.Drawing.Size(1028, 697);
 			this.gmap.TabIndex = 1;
 			this.gmap.Zoom = 13D;
+			this.gmap.OnPolygonClick += new GMap.NET.WindowsForms.PolygonClick(this.gmap_OnPolygonClick);
 			this.gmap.Load += new System.EventHandler(this.gmap_Load);
 			// 
 			// openFile
@@ -187,56 +189,66 @@ namespace PolygonValidator
 			// 
 			// details
 			// 
-			this.details.Controls.Add(this.label4);
-			this.details.Controls.Add(this.label3);
-			this.details.Controls.Add(this.label2);
-			this.details.Controls.Add(this.label1);
+			this.details.Controls.Add(this.name);
+			this.details.Controls.Add(this.size);
+			this.details.Controls.Add(this.square);
+			this.details.Controls.Add(this.coast);
+			this.details.Controls.Add(this.depth);
 			this.details.Location = new System.Drawing.Point(1046, 277);
 			this.details.Name = "details";
-			this.details.Size = new System.Drawing.Size(224, 212);
+			this.details.Size = new System.Drawing.Size(224, 263);
 			this.details.TabIndex = 6;
 			this.details.TabStop = false;
 			this.details.Text = "Подробная информация";
 			// 
-			// label4
+			// size
 			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(6, 173);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(75, 17);
-			this.label4.TabIndex = 3;
-			this.label4.Text = "Размеры: ";
+			this.size.AutoSize = true;
+			this.size.Location = new System.Drawing.Point(6, 197);
+			this.size.Name = "size";
+			this.size.Size = new System.Drawing.Size(75, 17);
+			this.size.TabIndex = 3;
+			this.size.Text = "Размеры: ";
 			// 
-			// label3
+			// square
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(6, 134);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(76, 17);
-			this.label3.TabIndex = 2;
-			this.label3.Text = "Площадь: ";
+			this.square.AutoSize = true;
+			this.square.Location = new System.Drawing.Point(6, 159);
+			this.square.Name = "square";
+			this.square.Size = new System.Drawing.Size(76, 17);
+			this.square.TabIndex = 2;
+			this.square.Text = "Площадь: ";
 			// 
-			// label2
+			// coast
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(6, 93);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(125, 17);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "Береговая линия:";
+			this.coast.AutoSize = true;
+			this.coast.Location = new System.Drawing.Point(6, 120);
+			this.coast.Name = "coast";
+			this.coast.Size = new System.Drawing.Size(125, 17);
+			this.coast.TabIndex = 1;
+			this.coast.Text = "Береговая линия:";
 			// 
-			// label1
+			// depth
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(6, 57);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(125, 17);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Средняя глубина:";
+			this.depth.AutoSize = true;
+			this.depth.Location = new System.Drawing.Point(6, 79);
+			this.depth.Name = "depth";
+			this.depth.Size = new System.Drawing.Size(125, 17);
+			this.depth.TabIndex = 0;
+			this.depth.Text = "Средняя глубина:";
 			// 
 			// saveFileDialog1
 			// 
 			this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+			// 
+			// name
+			// 
+			this.name.AutoSize = true;
+			this.name.Location = new System.Drawing.Point(6, 37);
+			this.name.Name = "name";
+			this.name.Size = new System.Drawing.Size(80, 17);
+			this.name.TabIndex = 4;
+			this.name.Text = "Название: ";
 			// 
 			// MainForm
 			// 
@@ -276,12 +288,13 @@ namespace PolygonValidator
 		private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem информацияToolStripMenuItem;
 		private System.Windows.Forms.GroupBox details;
-		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label size;
+		private System.Windows.Forms.Label square;
+		private System.Windows.Forms.Label coast;
+		private System.Windows.Forms.Label depth;
 		private System.Windows.Forms.ToolStripMenuItem closeCurrent;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+		private System.Windows.Forms.Label name;
 	}
 }
 
