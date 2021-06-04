@@ -50,6 +50,8 @@ namespace PolygonValidator
 			this.coast = new System.Windows.Forms.Label();
 			this.depth = new System.Windows.Forms.Label();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+			this.colorSelector = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.details.SuspendLayout();
 			this.SuspendLayout();
@@ -62,7 +64,7 @@ namespace PolygonValidator
             this.оПрограммеToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1384, 28);
+			this.menuStrip1.Size = new System.Drawing.Size(1384, 30);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -76,7 +78,7 @@ namespace PolygonValidator
             this.saveQGIS,
             this.exit});
 			this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
 			this.файлToolStripMenuItem.Text = "Файл";
 			// 
 			// открытьToolStripMenuItem
@@ -126,7 +128,7 @@ namespace PolygonValidator
 			this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.информацияToolStripMenuItem});
 			this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
+			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 26);
 			this.оПрограммеToolStripMenuItem.Text = "О программе";
 			// 
 			// информацияToolStripMenuItem
@@ -251,12 +253,23 @@ namespace PolygonValidator
 			// 
 			this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
 			// 
+			// colorSelector
+			// 
+			this.colorSelector.Location = new System.Drawing.Point(1055, 468);
+			this.colorSelector.Name = "colorSelector";
+			this.colorSelector.Size = new System.Drawing.Size(317, 55);
+			this.colorSelector.TabIndex = 7;
+			this.colorSelector.Text = "Изменить цвет";
+			this.colorSelector.UseVisualStyleBackColor = true;
+			this.colorSelector.Click += new System.EventHandler(this.colorSelector_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.ClientSize = new System.Drawing.Size(1384, 740);
+			this.Controls.Add(this.colorSelector);
 			this.Controls.Add(this.details);
 			this.Controls.Add(this.fixButton);
 			this.Controls.Add(this.findMap);
@@ -297,6 +310,8 @@ namespace PolygonValidator
 		private System.Windows.Forms.ToolStripMenuItem closeCurrent;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
 		private System.Windows.Forms.Label name;
+		private System.Windows.Forms.ColorDialog colorDialog1;
+		private System.Windows.Forms.Button colorSelector;
 	}
 }
 

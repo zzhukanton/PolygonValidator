@@ -19,6 +19,7 @@ namespace PolygonValidator
 		private bool showIntersections;
 		private List<GMapOverlay> markersOverlays;
 		private string currentFilename;
+		private GMapPolygon currentSelectedPolygon;
 
 		private const string HidePointsButtonText = "Скрыть точки самопересечений";
 		private const string ShowPointsButtonText = "Показать точки самопересечений";
@@ -37,6 +38,7 @@ namespace PolygonValidator
 			saveAs.Enabled = false;
 			saveQGIS.Enabled = false;
 			closeCurrent.Enabled = false;
+			colorSelector.Enabled = false;
 
 			this.polygons = new List<Polygon>();
 			this.updatedPolygons = new List<Polygon>();
@@ -102,7 +104,6 @@ namespace PolygonValidator
 		private void DrawPolygons(List<Polygon> polygons)
 		{
 			GMapOverlay polyOverlay = new GMapOverlay("polygons");
-			int i = 1;
 
 			foreach (var polygon in polygons)
 			{
@@ -353,17 +354,36 @@ namespace PolygonValidator
 		private void gmap_OnPolygonClick(GMapPolygon item, MouseEventArgs e)
 		{
 			Polygon polygon = this.polygons.Find(p => p.Name == item.Name);
+			this.currentSelectedPolygon = item;
 
 			name.Text = $"{NameText}{polygon.Name}";
 			depth.Text = $"{AverageDepthText}{polygon.AverageDepth}";
 			coast.Text = $"{CoastlineText}{polygon.Coastline}";
 			square.Text = $"{SquareText}{polygon.Square}";
 			size.Text = $"{SizeText}{polygon.Size}";
+
+			colorSelector.Enabled = true;
 		}
 
 		private void информацияToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			MessageBox.Show("Валидатор полигонов 2021", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+
+		private void colorSelector_Click(object sender, EventArgs e)
+		{
+			if (this.currentSelectedPolygon == null)
+			{
+				MessageBox.Show("Сначала выберите полигон!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (colorDialog1.ShowDialog() == DialogResult.Cancel)
+			{
+				return;
+			}
+
+			this.currentSelectedPolygon.Fill = new SolidBrush(Color.FromArgb(50, colorDialog1.Color));
 		}
 	}
 }
