@@ -22,11 +22,11 @@ namespace PolygonValidator
 
 		private const string HidePointsButtonText = "Скрыть точки самопересечений";
 		private const string ShowPointsButtonText = "Показать точки самопересечений";
-		private const string NameText = "Название: {0}";
-		private const string AverageDepthText = "Средняя глубина: {0}";
-		private const string CoastlineText = "Береговая линия: {0}";
-		private const string SquareText = "Площадь: {0}";
-		private const string SizeText = "Размеры: {0}";
+		private const string NameText = "Название: ";
+		private const string AverageDepthText = "Средняя глубина: ";
+		private const string CoastlineText = "Береговая линия: ";
+		private const string SquareText = "Площадь: ";
+		private const string SizeText = "Размеры: ";
 
 		public MainForm()
 		{
@@ -55,7 +55,6 @@ namespace PolygonValidator
 			this.ReadMapPolygon(this.currentFilename);
 			this.DrawPolygons(this.polygons);
 
-			fixButton.Enabled = true;
 			save.Enabled = true;
 			saveAs.Enabled = true;
 			saveQGIS.Enabled = true;
@@ -314,6 +313,11 @@ namespace PolygonValidator
 			this.markersOverlays.Clear();
 
 			// clear labels with data
+			name.Text = NameText;
+			depth.Text = AverageDepthText;
+			coast.Text = CoastlineText;
+			square.Text = SquareText;
+			size.Text = SizeText;
 		}
 
 		private void exit_Click(object sender, EventArgs e) => this.Close();
@@ -351,11 +355,11 @@ namespace PolygonValidator
 		{
 			Polygon polygon = this.polygons.Find(p => p.Name == item.Name);
 
-			name.Text = string.Format(NameText, polygon.Name);
-			depth.Text = string.Format(AverageDepthText, polygon.AverageDepth);
-			coast.Text = string.Format(CoastlineText, polygon.Coastline);
-			square.Text = string.Format(SquareText, polygon.Square);
-			size.Text = string.Format(SizeText, polygon.Size);
+			name.Text = $"{NameText}{polygon.Name}";
+			depth.Text = $"{AverageDepthText}{polygon.AverageDepth}";
+			coast.Text = $"{CoastlineText}{polygon.Coastline}";
+			square.Text = $"{SquareText}{polygon.Square}";
+			size.Text = $"{SizeText}{polygon.Size}";
 		}
 	}
 }

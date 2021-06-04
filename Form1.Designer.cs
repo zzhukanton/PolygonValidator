@@ -44,12 +44,12 @@ namespace PolygonValidator
 			this.findMap = new System.Windows.Forms.Button();
 			this.fixButton = new System.Windows.Forms.Button();
 			this.details = new System.Windows.Forms.GroupBox();
+			this.name = new System.Windows.Forms.Label();
 			this.size = new System.Windows.Forms.Label();
 			this.square = new System.Windows.Forms.Label();
 			this.coast = new System.Windows.Forms.Label();
 			this.depth = new System.Windows.Forms.Label();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-			this.name = new System.Windows.Forms.Label();
 			this.menuStrip1.SuspendLayout();
 			this.details.SuspendLayout();
 			this.SuspendLayout();
@@ -62,7 +62,7 @@ namespace PolygonValidator
             this.оПрограммеToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1333, 30);
+			this.menuStrip1.Size = new System.Drawing.Size(1384, 28);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -76,7 +76,7 @@ namespace PolygonValidator
             this.saveQGIS,
             this.exit});
 			this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
+			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
 			this.файлToolStripMenuItem.Text = "Файл";
 			// 
 			// открытьToolStripMenuItem
@@ -126,7 +126,7 @@ namespace PolygonValidator
 			this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.информацияToolStripMenuItem});
 			this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 26);
+			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
 			this.оПрограммеToolStripMenuItem.Text = "О программе";
 			// 
 			// информацияToolStripMenuItem
@@ -171,7 +171,7 @@ namespace PolygonValidator
 			// 
 			this.findMap.Location = new System.Drawing.Point(1046, 31);
 			this.findMap.Name = "findMap";
-			this.findMap.Size = new System.Drawing.Size(224, 94);
+			this.findMap.Size = new System.Drawing.Size(326, 94);
 			this.findMap.TabIndex = 4;
 			this.findMap.Text = "Показать точки самопересечения";
 			this.findMap.UseVisualStyleBackColor = true;
@@ -181,7 +181,7 @@ namespace PolygonValidator
 			// 
 			this.fixButton.Location = new System.Drawing.Point(1046, 131);
 			this.fixButton.Name = "fixButton";
-			this.fixButton.Size = new System.Drawing.Size(224, 94);
+			this.fixButton.Size = new System.Drawing.Size(326, 94);
 			this.fixButton.TabIndex = 5;
 			this.fixButton.Text = "Сгладить точки самопересечения";
 			this.fixButton.UseVisualStyleBackColor = true;
@@ -194,12 +194,21 @@ namespace PolygonValidator
 			this.details.Controls.Add(this.square);
 			this.details.Controls.Add(this.coast);
 			this.details.Controls.Add(this.depth);
-			this.details.Location = new System.Drawing.Point(1046, 277);
+			this.details.Location = new System.Drawing.Point(1046, 231);
 			this.details.Name = "details";
-			this.details.Size = new System.Drawing.Size(224, 263);
+			this.details.Size = new System.Drawing.Size(326, 230);
 			this.details.TabIndex = 6;
 			this.details.TabStop = false;
 			this.details.Text = "Подробная информация";
+			// 
+			// name
+			// 
+			this.name.AutoSize = true;
+			this.name.Location = new System.Drawing.Point(6, 37);
+			this.name.Name = "name";
+			this.name.Size = new System.Drawing.Size(80, 17);
+			this.name.TabIndex = 4;
+			this.name.Text = "Название: ";
 			// 
 			// size
 			// 
@@ -241,20 +250,11 @@ namespace PolygonValidator
 			// 
 			this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
 			// 
-			// name
-			// 
-			this.name.AutoSize = true;
-			this.name.Location = new System.Drawing.Point(6, 37);
-			this.name.Name = "name";
-			this.name.Size = new System.Drawing.Size(80, 17);
-			this.name.TabIndex = 4;
-			this.name.Text = "Название: ";
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1333, 740);
+			this.ClientSize = new System.Drawing.Size(1384, 740);
 			this.Controls.Add(this.details);
 			this.Controls.Add(this.fixButton);
 			this.Controls.Add(this.findMap);
