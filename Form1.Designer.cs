@@ -52,8 +52,11 @@ namespace PolygonValidator
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.colorSelector = new System.Windows.Forms.Button();
+			this.borderSelector = new System.Windows.Forms.Button();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.menuStrip1.SuspendLayout();
 			this.details.SuspendLayout();
+			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -64,7 +67,7 @@ namespace PolygonValidator
             this.оПрограммеToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1384, 30);
+			this.menuStrip1.Size = new System.Drawing.Size(1384, 28);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -78,7 +81,7 @@ namespace PolygonValidator
             this.saveQGIS,
             this.exit});
 			this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 26);
+			this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
 			this.файлToolStripMenuItem.Text = "Файл";
 			// 
 			// открытьToolStripMenuItem
@@ -128,7 +131,7 @@ namespace PolygonValidator
 			this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.информацияToolStripMenuItem});
 			this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 26);
+			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(118, 24);
 			this.оПрограммеToolStripMenuItem.Text = "О программе";
 			// 
 			// информацияToolStripMenuItem
@@ -172,6 +175,7 @@ namespace PolygonValidator
 			// 
 			// findMap
 			// 
+			this.findMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.findMap.Location = new System.Drawing.Point(1046, 31);
 			this.findMap.Name = "findMap";
 			this.findMap.Size = new System.Drawing.Size(326, 94);
@@ -182,6 +186,7 @@ namespace PolygonValidator
 			// 
 			// fixButton
 			// 
+			this.fixButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.fixButton.Location = new System.Drawing.Point(1046, 131);
 			this.fixButton.Name = "fixButton";
 			this.fixButton.Size = new System.Drawing.Size(326, 94);
@@ -197,7 +202,8 @@ namespace PolygonValidator
 			this.details.Controls.Add(this.square);
 			this.details.Controls.Add(this.coast);
 			this.details.Controls.Add(this.depth);
-			this.details.Location = new System.Drawing.Point(1046, 231);
+			this.details.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.details.Location = new System.Drawing.Point(1046, 244);
 			this.details.Name = "details";
 			this.details.Size = new System.Drawing.Size(326, 230);
 			this.details.TabIndex = 6;
@@ -209,7 +215,7 @@ namespace PolygonValidator
 			this.name.AutoSize = true;
 			this.name.Location = new System.Drawing.Point(6, 37);
 			this.name.Name = "name";
-			this.name.Size = new System.Drawing.Size(80, 17);
+			this.name.Size = new System.Drawing.Size(83, 18);
 			this.name.TabIndex = 4;
 			this.name.Text = "Название: ";
 			// 
@@ -218,7 +224,7 @@ namespace PolygonValidator
 			this.size.AutoSize = true;
 			this.size.Location = new System.Drawing.Point(6, 197);
 			this.size.Name = "size";
-			this.size.Size = new System.Drawing.Size(75, 17);
+			this.size.Size = new System.Drawing.Size(80, 18);
 			this.size.TabIndex = 3;
 			this.size.Text = "Размеры: ";
 			// 
@@ -227,7 +233,7 @@ namespace PolygonValidator
 			this.square.AutoSize = true;
 			this.square.Location = new System.Drawing.Point(6, 159);
 			this.square.Name = "square";
-			this.square.Size = new System.Drawing.Size(76, 17);
+			this.square.Size = new System.Drawing.Size(81, 18);
 			this.square.TabIndex = 2;
 			this.square.Text = "Площадь: ";
 			// 
@@ -236,7 +242,7 @@ namespace PolygonValidator
 			this.coast.AutoSize = true;
 			this.coast.Location = new System.Drawing.Point(6, 120);
 			this.coast.Name = "coast";
-			this.coast.Size = new System.Drawing.Size(125, 17);
+			this.coast.Size = new System.Drawing.Size(130, 18);
 			this.coast.TabIndex = 1;
 			this.coast.Text = "Береговая линия:";
 			// 
@@ -245,7 +251,7 @@ namespace PolygonValidator
 			this.depth.AutoSize = true;
 			this.depth.Location = new System.Drawing.Point(6, 79);
 			this.depth.Name = "depth";
-			this.depth.Size = new System.Drawing.Size(125, 17);
+			this.depth.Size = new System.Drawing.Size(131, 18);
 			this.depth.TabIndex = 0;
 			this.depth.Text = "Средняя глубина:";
 			// 
@@ -255,13 +261,36 @@ namespace PolygonValidator
 			// 
 			// colorSelector
 			// 
-			this.colorSelector.Location = new System.Drawing.Point(1055, 468);
+			this.colorSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.colorSelector.Location = new System.Drawing.Point(6, 35);
 			this.colorSelector.Name = "colorSelector";
-			this.colorSelector.Size = new System.Drawing.Size(317, 55);
+			this.colorSelector.Size = new System.Drawing.Size(305, 55);
 			this.colorSelector.TabIndex = 7;
-			this.colorSelector.Text = "Изменить цвет";
+			this.colorSelector.Text = "Заливка";
 			this.colorSelector.UseVisualStyleBackColor = true;
 			this.colorSelector.Click += new System.EventHandler(this.colorSelector_Click);
+			// 
+			// borderSelector
+			// 
+			this.borderSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.borderSelector.Location = new System.Drawing.Point(6, 96);
+			this.borderSelector.Name = "borderSelector";
+			this.borderSelector.Size = new System.Drawing.Size(305, 55);
+			this.borderSelector.TabIndex = 8;
+			this.borderSelector.Text = "Контур";
+			this.borderSelector.UseVisualStyleBackColor = true;
+			// 
+			// groupBox1
+			// 
+			this.groupBox1.Controls.Add(this.colorSelector);
+			this.groupBox1.Controls.Add(this.borderSelector);
+			this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.groupBox1.Location = new System.Drawing.Point(1055, 491);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(317, 169);
+			this.groupBox1.TabIndex = 9;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Выбрать цвет";
 			// 
 			// MainForm
 			// 
@@ -269,7 +298,7 @@ namespace PolygonValidator
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.ClientSize = new System.Drawing.Size(1384, 740);
-			this.Controls.Add(this.colorSelector);
+			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.details);
 			this.Controls.Add(this.fixButton);
 			this.Controls.Add(this.findMap);
@@ -282,6 +311,7 @@ namespace PolygonValidator
 			this.menuStrip1.PerformLayout();
 			this.details.ResumeLayout(false);
 			this.details.PerformLayout();
+			this.groupBox1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -312,6 +342,8 @@ namespace PolygonValidator
 		private System.Windows.Forms.Label name;
 		private System.Windows.Forms.ColorDialog colorDialog1;
 		private System.Windows.Forms.Button colorSelector;
+		private System.Windows.Forms.Button borderSelector;
+		private System.Windows.Forms.GroupBox groupBox1;
 	}
 }
 

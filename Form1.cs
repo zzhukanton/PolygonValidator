@@ -123,7 +123,7 @@ namespace PolygonValidator
 			gmap.Zoom--;
 		}
 
-		private void gmap_Load(object sender, EventArgs e)
+		private async void gmap_Load(object sender, EventArgs e)
 		{
 			gmap.ShowCenter = false;
 			gmap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
@@ -374,7 +374,7 @@ namespace PolygonValidator
 
 		private void информацияToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("Валидатор полигонов 2021", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show("Валидатор полигонов 2021.\n\n\nДля корректной работы необходимо подключение к Интернету.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		private void colorSelector_Click(object sender, EventArgs e)
