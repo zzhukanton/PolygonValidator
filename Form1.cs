@@ -119,6 +119,8 @@ namespace PolygonValidator
 
 			gmap.Overlays.Add(polyOverlay);
 			
+			gmap.Zoom++;
+			gmap.Zoom--;
 		}
 
 		private void gmap_Load(object sender, EventArgs e)
@@ -177,6 +179,8 @@ namespace PolygonValidator
 			this.showIntersections = true;
 			findMap.Text = HidePointsButtonText;
 			fixButton.Enabled = true;
+			gmap.Zoom++;
+			gmap.Zoom--;
 		}
 
 		private PointLatLng? CheckForIntersection(PointLatLng p1, PointLatLng p2, PointLatLng p3, PointLatLng p4)
@@ -296,6 +300,9 @@ namespace PolygonValidator
 			gmap.Overlays.Clear();
 
 			DrawPolygons(this.updatedPolygons);
+
+			gmap.Zoom++;
+			gmap.Zoom--;
 		}
 
 		private void closeCurrent_Click(object sender, EventArgs e)
@@ -384,6 +391,8 @@ namespace PolygonValidator
 			}
 
 			this.currentSelectedPolygon.Fill = new SolidBrush(Color.FromArgb(50, colorDialog1.Color));
+			gmap.Zoom++;
+			gmap.Zoom--;
 		}
 	}
 }
