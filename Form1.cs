@@ -288,7 +288,6 @@ namespace PolygonValidator
 
 			gmap.Overlays.Add(markersOverlay);
 			this.markersOverlays.Add(markersOverlay);
-			//gmap.Refresh();
 		}
 
 		private void fixButton_Click(object sender, EventArgs e)
@@ -360,6 +359,11 @@ namespace PolygonValidator
 			coast.Text = $"{CoastlineText}{polygon.Coastline}";
 			square.Text = $"{SquareText}{polygon.Square}";
 			size.Text = $"{SizeText}{polygon.Size}";
+		}
+
+		private void информацияToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			MessageBox.Show("Валидатор полигонов 2021", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 	}
 }

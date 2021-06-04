@@ -132,8 +132,9 @@ namespace PolygonValidator
 			// информацияToolStripMenuItem
 			// 
 			this.информацияToolStripMenuItem.Name = "информацияToolStripMenuItem";
-			this.информацияToolStripMenuItem.Size = new System.Drawing.Size(185, 26);
+			this.информацияToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
 			this.информацияToolStripMenuItem.Text = "Информация";
+			this.информацияToolStripMenuItem.Click += new System.EventHandler(this.информацияToolStripMenuItem_Click);
 			// 
 			// gmap
 			// 
@@ -254,6 +255,7 @@ namespace PolygonValidator
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoSize = true;
 			this.ClientSize = new System.Drawing.Size(1384, 740);
 			this.Controls.Add(this.details);
 			this.Controls.Add(this.fixButton);
