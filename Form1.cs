@@ -128,7 +128,7 @@ namespace PolygonValidator
 			gmap.ShowCenter = false;
 			gmap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
 			GMaps.Instance.Mode = AccessMode.ServerOnly;
-			gmap.Position = new PointLatLng(37.71169139127381, 55.629253022756586);
+			gmap.Position = new PointLatLng(55.629253022756586, 37.71169139127381);
 		}
 
 		private void findMap_Click(object sender, EventArgs e)
@@ -370,6 +370,7 @@ namespace PolygonValidator
 			size.Text = $"{SizeText}{polygon.Size}";
 
 			colorSelector.Enabled = true;
+			borderSelector.Enabled = true;
 		}
 
 		private void информацияToolStripMenuItem_Click(object sender, EventArgs e)
@@ -391,6 +392,24 @@ namespace PolygonValidator
 			}
 
 			this.currentSelectedPolygon.Fill = new SolidBrush(Color.FromArgb(50, colorDialog1.Color));
+			gmap.Zoom++;
+			gmap.Zoom--;
+		}
+
+		private void borderSelector_Click(object sender, EventArgs e)
+		{
+			if (this.currentSelectedPolygon == null)
+			{
+				MessageBox.Show("Сначала выберите полигон!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (colorDialog1.ShowDialog() == DialogResult.Cancel)
+			{
+				return;
+			}
+
+			this.currentSelectedPolygon.Stroke = new Pen(colorDialog1.Color, 1);
 			gmap.Zoom++;
 			gmap.Zoom--;
 		}

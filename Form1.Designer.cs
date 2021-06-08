@@ -137,7 +137,7 @@ namespace PolygonValidator
 			// информацияToolStripMenuItem
 			// 
 			this.информацияToolStripMenuItem.Name = "информацияToolStripMenuItem";
-			this.информацияToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+			this.информацияToolStripMenuItem.Size = new System.Drawing.Size(185, 26);
 			this.информацияToolStripMenuItem.Text = "Информация";
 			this.информацияToolStripMenuItem.Click += new System.EventHandler(this.информацияToolStripMenuItem_Click);
 			// 
@@ -279,6 +279,7 @@ namespace PolygonValidator
 			this.borderSelector.TabIndex = 8;
 			this.borderSelector.Text = "Контур";
 			this.borderSelector.UseVisualStyleBackColor = true;
+			this.borderSelector.Click += new System.EventHandler(this.borderSelector_Click);
 			// 
 			// groupBox1
 			// 
