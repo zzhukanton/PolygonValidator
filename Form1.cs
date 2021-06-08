@@ -75,8 +75,8 @@ namespace PolygonValidator
 				{
 					string[] coordinates = allSinglePolygonData[j].Split(new[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);
 					polygonPoints.Add(new PointLatLng(
-						double.Parse(coordinates[0], CultureInfo.InvariantCulture),
-						double.Parse(coordinates[1], CultureInfo.InvariantCulture)));
+						double.Parse(coordinates[1], CultureInfo.InvariantCulture),
+						double.Parse(coordinates[0], CultureInfo.InvariantCulture)));
 				}
 
 				this.polygons.Add(new Polygon
