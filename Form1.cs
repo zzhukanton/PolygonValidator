@@ -95,7 +95,7 @@ namespace PolygonValidator
 
 		private void DrawPolygons(List<Polygon> polygons)
 		{
-			GMapOverlay polyOverlay = new GMapOverlay(Labels.PolygonsOverlay);
+			GMapOverlay polyOverlay = new GMapOverlay(Overlay.Polygon);
 
 			foreach (var polygon in polygons)
 			{
@@ -272,7 +272,7 @@ namespace PolygonValidator
 
 		private void HighlightIntersectionsMap(List<PointLatLng> intersections)
 		{
-			GMapOverlay markersOverlay = new GMapOverlay(Labels.MarkersOverlay);
+			GMapOverlay markersOverlay = new GMapOverlay(Overlay.Marker);
 
 			intersections.ForEach(point =>
 			{

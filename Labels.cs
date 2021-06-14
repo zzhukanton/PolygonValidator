@@ -20,7 +20,5 @@
 		public const string AboutMessage = "Валидатор полигонов 2021.\n\n\nДля корректной работы необходимо подключение к Интернету.";
 		public const string SelectPolygonMessage = "Сначала выберите полигон!";
 		public const string LoadPolygonMessage = "Данные полигонов не были загружены!";
-		public const string PolygonsOverlay = "polygons";
-		public const string MarkersOverlay = "markers";
 	}
 }

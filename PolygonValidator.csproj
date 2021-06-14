@@ -59,6 +59,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Labels.cs" />
+    <Compile Include="Overlay.cs" />
     <Compile Include="Polygon.cs" />
     <Compile Include="PolygonSerializer.cs" />
     <Compile Include="Program.cs" />
