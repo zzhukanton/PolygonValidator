@@ -21,14 +21,6 @@ namespace PolygonValidator
 		private string currentFilename;
 		private GMapPolygon currentSelectedPolygon;
 
-		private const string HidePointsButtonText = "Скрыть точки самопересечений";
-		private const string ShowPointsButtonText = "Показать точки самопересечений";
-		private const string NameText = "Название: ";
-		private const string AverageDepthText = "Средняя глубина: ";
-		private const string CoastlineText = "Береговая линия: ";
-		private const string SquareText = "Площадь: ";
-		private const string SizeText = "Размеры: ";
-
 		public MainForm()
 		{
 			this.InitializeComponent();
@@ -103,7 +95,7 @@ namespace PolygonValidator
 
 		private void DrawPolygons(List<Polygon> polygons)
 		{
-			GMapOverlay polyOverlay = new GMapOverlay("polygons");
+			GMapOverlay polyOverlay = new GMapOverlay(Labels.PolygonsOverlay);
 
 			foreach (var polygon in polygons)
 			{
@@ -123,7 +115,7 @@ namespace PolygonValidator
 			gmap.Zoom--;
 		}
 
-		private async void gmap_Load(object sender, EventArgs e)
+		private void gmap_Load(object sender, EventArgs e)
 		{
 			gmap.ShowCenter = false;
 			gmap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
@@ -135,13 +127,13 @@ namespace PolygonValidator
 		{
 			if (this.polygons.Count == 0)
 			{
-				MessageBox.Show("Данные полигонов не были загружены!", "Ошибка",MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(Labels.LoadPolygonMessage, Labels.ErrorMessageTitle,MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
 			if (this.showIntersections)
 			{
-				findMap.Text = ShowPointsButtonText;
+				findMap.Text = Labels.ShowPointsButtonText;
 				this.showIntersections = false;
 			}
 
@@ -177,7 +169,7 @@ namespace PolygonValidator
 			}
 
 			this.showIntersections = true;
-			findMap.Text = HidePointsButtonText;
+			findMap.Text = Labels.HidePointsButtonText;
 			fixButton.Enabled = true;
 			gmap.Zoom++;
 			gmap.Zoom--;
@@ -280,7 +272,7 @@ namespace PolygonValidator
 
 		private void HighlightIntersectionsMap(List<PointLatLng> intersections)
 		{
-			GMapOverlay markersOverlay = new GMapOverlay("markers");
+			GMapOverlay markersOverlay = new GMapOverlay(Labels.MarkersOverlay);
 
 			intersections.ForEach(point =>
 			{
@@ -320,11 +312,11 @@ namespace PolygonValidator
 			this.markersOverlays.Clear();
 
 			// clear labels with data
-			name.Text = NameText;
-			depth.Text = AverageDepthText;
-			coast.Text = CoastlineText;
-			square.Text = SquareText;
-			size.Text = SizeText;
+			name.Text = Labels.NameText;
+			depth.Text = Labels.AverageDepthText;
+			coast.Text = Labels.CoastlineText;
+			square.Text = Labels.SquareText;
+			size.Text = Labels.SizeText;
 		}
 
 		private void exit_Click(object sender, EventArgs e) => this.Close();
@@ -337,17 +329,17 @@ namespace PolygonValidator
 
 		private void saveAs_Click(object sender, EventArgs e)
 		{
-			saveFileDialog1.DefaultExt = "txt";
-			saveFileDialog1.FileName = "new csv";
-			saveFileDialog1.Filter = "Comma-separated values (.csv)|*.csv|Normal text file (.txt)|*.txt";
+			saveFileDialog1.DefaultExt = Labels.TxtExtention;
+			saveFileDialog1.FileName = Labels.DefaultFileName;
+			saveFileDialog1.Filter = Labels.CsvTxtFilter;
 			saveFileDialog1.ShowDialog();
 		}
 
 		private void saveQGIS_Click(object sender, EventArgs e)
 		{
-			saveFileDialog1.DefaultExt = "csv";
-			saveFileDialog1.FileName = "new csv";
-			saveFileDialog1.Filter = "Comma-separated values (.csv)|*.csv";
+			saveFileDialog1.DefaultExt = Labels.CsvExtention;
+			saveFileDialog1.FileName = Labels.DefaultFileName;
+			saveFileDialog1.Filter = Labels.CsvFilter;
 			saveFileDialog1.ShowDialog();
 		}
 
@@ -355,7 +347,7 @@ namespace PolygonValidator
 		{
 			PolygonSerializer serializer = new PolygonSerializer();
 			serializer.SavePolygonsAsQGIS(saveFileDialog1.FileName, updatedPolygons);
-			MessageBox.Show("Файл сохранен успешно!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(Labels.SaveSuccessMessage, Labels.InfoMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		private void gmap_OnPolygonClick(GMapPolygon item, MouseEventArgs e)
@@ -363,11 +355,11 @@ namespace PolygonValidator
 			Polygon polygon = this.polygons.Find(p => p.Name == item.Name);
 			this.currentSelectedPolygon = item;
 
-			name.Text = $"{NameText}{polygon.Name}";
-			depth.Text = $"{AverageDepthText}{polygon.AverageDepth}";
-			coast.Text = $"{CoastlineText}{polygon.Coastline}";
-			square.Text = $"{SquareText}{polygon.Square}";
-			size.Text = $"{SizeText}{polygon.Size}";
+			name.Text = $"{Labels.NameText}{polygon.Name}";
+			depth.Text = $"{Labels.AverageDepthText}{polygon.AverageDepth}";
+			coast.Text = $"{Labels.CoastlineText}{polygon.Coastline}";
+			square.Text = $"{Labels.SquareText}{polygon.Square}";
+			size.Text = $"{Labels.SizeText}{polygon.Size}";
 
 			colorSelector.Enabled = true;
 			borderSelector.Enabled = true;
@@ -375,14 +367,14 @@ namespace PolygonValidator
 
 		private void информацияToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("Валидатор полигонов 2021.\n\n\nДля корректной работы необходимо подключение к Интернету.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(Labels.AboutMessage, Labels.InfoMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		private void colorSelector_Click(object sender, EventArgs e)
 		{
 			if (this.currentSelectedPolygon == null)
 			{
-				MessageBox.Show("Сначала выберите полигон!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(Labels.SelectPolygonMessage, Labels.ErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
@@ -400,7 +392,7 @@ namespace PolygonValidator
 		{
 			if (this.currentSelectedPolygon == null)
 			{
-				MessageBox.Show("Сначала выберите полигон!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(Labels.SelectPolygonMessage, Labels.ErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
