@@ -329,17 +329,17 @@ namespace PolygonValidator
 
 		private void saveAs_Click(object sender, EventArgs e)
 		{
-			saveFileDialog1.DefaultExt = Labels.TxtExtention;
-			saveFileDialog1.FileName = Labels.DefaultFileName;
-			saveFileDialog1.Filter = Labels.CsvTxtFilter;
+			saveFileDialog1.DefaultExt = FileDialog.TxtExtention;
+			saveFileDialog1.FileName = FileDialog.DefaultFileName;
+			saveFileDialog1.Filter = FileDialog.CsvTxtFilter;
 			saveFileDialog1.ShowDialog();
 		}
 
 		private void saveQGIS_Click(object sender, EventArgs e)
 		{
-			saveFileDialog1.DefaultExt = Labels.CsvExtention;
-			saveFileDialog1.FileName = Labels.DefaultFileName;
-			saveFileDialog1.Filter = Labels.CsvFilter;
+			saveFileDialog1.DefaultExt = FileDialog.CsvExtention;
+			saveFileDialog1.FileName = FileDialog.DefaultFileName;
+			saveFileDialog1.Filter = FileDialog.CsvFilter;
 			saveFileDialog1.ShowDialog();
 		}
 
