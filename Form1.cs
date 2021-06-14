@@ -127,7 +127,7 @@ namespace PolygonValidator
 		{
 			if (this.polygons.Count == 0)
 			{
-				MessageBox.Show(Labels.LoadPolygonMessage, Labels.ErrorMessageTitle,MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(UserMessage.LoadPolygon, UserMessage.ErrorTitle,MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
@@ -347,7 +347,7 @@ namespace PolygonValidator
 		{
 			PolygonSerializer serializer = new PolygonSerializer();
 			serializer.SavePolygonsAsQGIS(saveFileDialog1.FileName, updatedPolygons);
-			MessageBox.Show(Labels.SaveSuccessMessage, Labels.InfoMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(UserMessage.SaveSuccess, UserMessage.InfoTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		private void gmap_OnPolygonClick(GMapPolygon item, MouseEventArgs e)
@@ -367,14 +367,14 @@ namespace PolygonValidator
 
 		private void информацияToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show(Labels.AboutMessage, Labels.InfoMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(UserMessage.About, UserMessage.InfoTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
 		private void colorSelector_Click(object sender, EventArgs e)
 		{
 			if (this.currentSelectedPolygon == null)
 			{
-				MessageBox.Show(Labels.SelectPolygonMessage, Labels.ErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(UserMessage.SelectPolygon, UserMessage.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
@@ -392,7 +392,7 @@ namespace PolygonValidator
 		{
 			if (this.currentSelectedPolygon == null)
 			{
-				MessageBox.Show(Labels.SelectPolygonMessage, Labels.ErrorMessageTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(UserMessage.SelectPolygon, UserMessage.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
